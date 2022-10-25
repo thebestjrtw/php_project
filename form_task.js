@@ -40,6 +40,7 @@ $(document).ready(function(){
             }else{
                 alert(rtn_obj.msg);
             }
+            
         });
     });
 });

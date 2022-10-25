@@ -67,17 +67,50 @@
                         $rtn_arr["status"]= true;
                         $rtn_arr["msg"]= "表單建立成功\n";
 
+                        require_once ("form_task_db.php");
+                       
+
                         if($_POST["checkbox"]=="true"){
                             // echo "確認訂閱煩死人不償命\n";
                             $rtn_arr["msg"].= "確認訂閱煩死人不償命\n";
                             
+                            $sqlCommand= "INSERT INTO `shipment_form` (`name`, `age`, `cell`, `address`, `email`, `date`, `subscribe`, `status`) 
+                                            VALUES ('$name','$age','$cell','$address','$email','$date','$checkbox','1');";
+                                            //("$name","$age","$cell","$address","$email","$date","$checkbox","1");";
+
+                            $result= $sql->query($sqlCommand);
+
+                            if($result){
+                                $rtn_arr["msg"].= "資料成功進入資料庫";
+                                // echo json_encode($rtn_arr,JSON_UNESCAPED_UNICODE);
+                            }else{
+                                $rtn_arr["msg"].= "資料未成功進入資料庫";
+                                // echo json_encode($rtn_arr,JSON_UNESCAPED_UNICODE);
+                            }
+                            
                             echo json_encode($rtn_arr,JSON_UNESCAPED_UNICODE);
+
                             exit;
+
                         }else{
                             // echo "不訂閱就是wise choice啦\n";
                             $rtn_arr["msg"].= "不訂閱就是wise choice啦\n";
                             
+                            $sqlCommand= "INSERT INTO `shipment_form` (`name`, `age`, `cell`, `address`, `email`, `date`, `subscribe`, `status`) 
+                                            VALUES ('$name','$age','$cell','$address','$email','$date','$checkbox','1');";
+
+                            $result= $sql->query($sqlCommand);
+
+                            if($result){
+                                $rtn_arr["msg"].= "資料成功進入資料庫";
+                                // echo json_encode($rtn_arr,JSON_UNESCAPED_UNICODE);
+                            }else{
+                                $rtn_arr["msg"].= "資料未成功進入資料庫";
+                                // echo json_encode($rtn_arr,JSON_UNESCAPED_UNICODE);
+                            }
+
                             echo json_encode($rtn_arr,JSON_UNESCAPED_UNICODE);
+
                             exit;
                         }
                         
@@ -88,3 +121,5 @@
     }
 
     echo json_encode($rtn_arr,JSON_UNESCAPED_UNICODE);
+
+    
